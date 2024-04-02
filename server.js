@@ -43,7 +43,7 @@ io.on('connection', (socket)=>{
       return callback(Error);
     }
 
-    //console.log(Error);
+    //console.log(user);
 
     const filter = new Filter();
     
@@ -58,9 +58,13 @@ io.on('connection', (socket)=>{
 
   socket.on('shareLocation', (coords, callback)=>{
 
-    const user = getUser(socket.id);
+    const { Error, user } = getUser(socket.id);
 
-    //console.log(coords);
+    if(Error) {
+      return callback(Error);
+    }
+
+    //console.log(user);
     const location = `https://www.google.com/maps?q=${coords.lat},${coords.long}`;
     io.to(user.room).emit('location', generateMessage(location, user.username));
     callback();

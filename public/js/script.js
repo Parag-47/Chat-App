@@ -37,7 +37,7 @@ function autoScroll () {
 }
 
 socket.on('message', (response)=>{
-  console.log('The Message Is: ',response.text);
+  //console.log('The Message Is: ',response.text);
 
   const html = Mustache.render(messageTemplate, {
     message: response.text,
@@ -50,11 +50,11 @@ socket.on('message', (response)=>{
 });
 
 socket.on("location", (response)=>{
-  console.log(response);
+  //console.log(response);
 
   const html = Mustache.render(locationTemplate, {
     location: response.text,
-    name: response.username,
+    name: response.name,
     time: moment(response.createdAt).format('h:mm a')
   });
   
@@ -73,11 +73,11 @@ $send.addEventListener('click', ()=>{
 
     if(error) {
       alert("Connection Lost Reloading The Page");
-      location.reload();
+      window.location.reload();
       console.log(message);
     }
 
-    console.log("Message Sent!");
+    //console.log("Message Sent!");
   });
 });
 
@@ -106,9 +106,14 @@ function success(data) {
     long: data.coords.longitude
   };
 
-  socket.emit('shareLocation', location, ()=>{
+  socket.emit('shareLocation', location, (error)=>{
     $shareLocation.removeAttribute("disabled");
-    console.log("Location Shared!");
+    if(error) {
+      alert("Connection Lost Reloading The Page");
+      window.location.reload();
+      console.log(message);
+    }
+    //console.log("Location Shared!");
   });
 
 }
