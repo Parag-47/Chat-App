@@ -63,18 +63,28 @@ socket.on("location", (response)=>{
 });
 
 $send.addEventListener('click', ()=>{
-  $send.setAttribute("disabled", "disabled");
   const message = $message.value;
+  $send.setAttribute("disabled", "disabled");
+
+  if(!message) {
+    //alert("Message Can't Be Empty!");
+    return $send.removeAttribute("disabled");
+  }  
 
   socket.emit('sendMessage', message, (error)=>{
     $send.removeAttribute("disabled");
     $message.value = "";
     $message.focus();
 
-    if(error) {
+    if(error === 'Profanity Is Not Allowed!') {
+      alert(error);
+      console.log(error);
+    }
+
+    if(error !== 'Profanity Is Not Allowed!') {
       alert("Connection Lost Reloading The Page");
       window.location.reload();
-      console.log(message);
+      console.log(error);
     }
 
     //console.log("Message Sent!");

@@ -37,6 +37,10 @@ io.on('connection', (socket)=>{
 
   socket.on('sendMessage', (getMessage, callback)=>{
 
+    if(!getMessage) {
+      return callback("Message Can't Be Empty!");
+    }
+
     const { Error, user } = getUser(socket.id);
     
     if(Error) {
@@ -48,7 +52,7 @@ io.on('connection', (socket)=>{
     const filter = new Filter();
     
     if(filter.isProfane(getMessage)) {
-      return callback('Profanity IS Not Allowed!');
+      return callback('Profanity Is Not Allowed!');
     }
 
     console.log('New Message: ',getMessage);
