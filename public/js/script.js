@@ -81,7 +81,7 @@ $send.addEventListener('click', ()=>{
       console.log(error);
     }
 
-    if(error !== 'Profanity Is Not Allowed!') {
+    else if(error !== 'Profanity Is Not Allowed!' && error) {
       alert("Connection Lost Reloading The Page");
       window.location.reload();
       console.log(error);
