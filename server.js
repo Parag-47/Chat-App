@@ -91,7 +91,7 @@ io.on('connection', (socket)=>{
 
 async function startServer() {
   server.listen(PORT, ()=>{
-    console.log(`Server Is Listing On Port ${5000}`);
+    console.log(`Server Is Listing On Port ${PORT}`);
   });
 }
 
