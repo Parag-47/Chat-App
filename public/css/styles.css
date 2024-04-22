@@ -94,7 +94,10 @@ button:disabled {
     color: white;
     background: #333744;
     width: 225px;
-    overflow-y: scroll
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Chat styles */
@@ -180,4 +183,21 @@ button:disabled {
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0 24px;
+}
+
+.b {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 16px;
+    padding: 24px;
+}
+
+.link {
+    font-size: 16px;
+}
+
+.link a {
+    text-decoration: none;
+    color: #fff;
 }
